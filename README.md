@@ -30,3 +30,132 @@
    - **final**: Nilai `final` ditetapkan satu kali dan tidak dapat diubah setelahnya, namun penetapannya bisa dilakukan saat runtime. `final` berguna untuk nilai yang hanya perlu disetel satu kali tetapi mungkin tidak diketahui saat kompilasi.
 
    **Perbedaan Utama**: `const` bersifat konstan sejak waktu kompilasi, sementara `final` dapat menerima nilai saat runtime.
+### 5. Implementasi checklist
+Berikut adalah langkah-langkah terperinci untuk mengimplementasikan aplikasi Flutter seperti yang kamu deskripsikan:
+
+   1. Membuat Repository GitHub dan Menginisialisasi Proyek Flutter
+
+   2. Membuat Struktur Aplikasi Flutter
+      1. Buka file utama proyek, yaitu `lib/main.dart`.
+      2. Hapus semua kode boilerplate Flutter.
+      3. Buat class `ItemHomepage` untuk menyimpan informasi item yang diperlukan.
+
+         ```dart
+         class ItemHomepage {
+         final String name;
+         final IconData icon;
+         final Color iconColor;
+         final Color backgroundColor;
+
+         ItemHomepage(this.name, this.icon, this.backgroundColor, this.iconColor);
+         }
+         ```
+
+   3. Membuat Widget Stateless untuk Tombol
+      1. Buat 3 `StatelessWidget` untuk menampilkan tombol. Sebagai contoh, buat `ButtonOne`, `ButtonTwo`, dan `ButtonThree`.
+      2. Masing-masing tombol akan menggunakan parameter `onPressed` untuk memunculkan `SnackBar` ketika tombol ditekan.
+         
+         ```dart
+         class ButtonOne extends StatelessWidget {
+         final VoidCallback onPressed;
+
+         ButtonOne({required this.onPressed});
+
+         @override
+         Widget build(BuildContext context) {
+            return ElevatedButton(
+               onPressed: onPressed,
+               child: Text("Button 1"),
+            );
+         }
+         }
+         
+         class ButtonTwo extends StatelessWidget {
+         final VoidCallback onPressed;
+
+         ButtonTwo({required this.onPressed});
+
+         @override
+         Widget build(BuildContext context) {
+            return ElevatedButton(
+               onPressed: onPressed,
+               child: Text("Button 2"),
+            );
+         }
+         }
+
+         class ButtonThree extends StatelessWidget {
+         final VoidCallback onPressed;
+
+         ButtonThree({required this.onPressed});
+
+         @override
+         Widget build(BuildContext context) {
+            return ElevatedButton(
+               onPressed: onPressed,
+               child: Text("Button 3"),
+            );
+         }
+         }
+         ```
+
+   4. Membuat Daftar Item Menggunakan `ItemHomepage`
+      1. Buat `List` yang berisi tiga objek `ItemHomepage`, masing-masing dengan atribut `name`, `icon`, `iconColor`, dan `backgroundColor`.
+
+         ```dart
+         List<ItemHomepage> items = [
+         ItemHomepage("Home", Icons.home, Colors.blue, Colors.white),
+         ItemHomepage("Settings", Icons.settings, Colors.green, Colors.white),
+         ItemHomepage("Profile", Icons.person, Colors.pink, Colors.white),
+         ];
+         ```
+
+   5. Menampilkan Item dan Memunculkan `SnackBar`
+      1. Pada `build` method di `MyApp` (atau class utama yang akan digunakan), tampilkan daftar `ItemHomepage` dalam bentuk tombol menggunakan `ListView`.
+      2. Gunakan `onPressed` pada `ElevatedButton` untuk memunculkan `SnackBar`.
+
+         ```dart
+         import 'package:flutter/material.dart';
+
+         void main() {
+         runApp(MyApp());
+         }
+
+         class MyApp extends StatelessWidget {
+         final List<ItemHomepage> items = [
+            ItemHomepage("Home", Icons.home, Colors.blue, Colors.white),
+            ItemHomepage("Settings", Icons.settings, Colors.green, Colors.white),
+            ItemHomepage("Profile", Icons.person, Colors.pink, Colors.white),
+         ];
+
+         @override
+         Widget build(BuildContext context) {
+            return MaterialApp(
+               home: Scaffold(
+               appBar: AppBar(
+                  title: Text("Home"),
+               ),
+               body: ListView.builder(
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                     return Card(
+                     color: items[index].backgroundColor,
+                     child: ListTile(
+                        leading: Icon(items[index].icon, color: items[index].iconColor),
+                        title: Text(items[index].name),
+                        onTap: () {
+                           ScaffoldMessenger.of(context).showSnackBar(
+                           SnackBar(content: Text('${items[index].name} tapped!'))
+                           );
+                        },
+                     ),
+                     );
+                  },
+               ),
+               ),
+            );
+         }
+         }
+         ```
+
+   6. Testing dan Komit ke Repository GitHub
