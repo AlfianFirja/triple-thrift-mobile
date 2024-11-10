@@ -1,6 +1,6 @@
 // main.dart
 import 'package:flutter/material.dart';
-import 'package:triple_thrift_mob/menu.dart';
+import 'package:triple_thrift_mob/screens/menu.dart';
 
 void main() {
   runApp(const MyApp());
