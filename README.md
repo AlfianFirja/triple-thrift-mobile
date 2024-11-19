@@ -244,3 +244,41 @@ Berikut adalah langkah-langkah terperinci untuk mengimplementasikan aplikasi Flu
    MaterialPageRoute(builder: (context) => SecondPage()),
    );
    ```
+
+## Tugas 9
+### 1. Pentingnya Membuat Model untuk Pengambilan/Pengiriman Data JSON:
+   - Model dalam konteks pengambilan atau pengiriman data JSON berperan penting untuk memastikan data yang diterima atau dikirim memiliki struktur yang benar dan sesuai dengan yang diharapkan. Dengan menggunakan model, kita dapat mendefinisikan tipe data, validasi input, dan memudahkan proses parsing data. Tanpa model, ada risiko kesalahan dalam parsing atau penggunaan data yang tidak sesuai formatnya, yang dapat menyebabkan error atau bug pada aplikasi.
+
+### 2. Fungsi dari Library HTTP yang Diimplementasikan:
+   - Library HTTP digunakan untuk mengelola permintaan (request) dan respons HTTP dalam aplikasi. Ini termasuk membuat permintaan ke server (misalnya GET, POST, PUT, DELETE), menangani respons dari server, mengelola header HTTP, dan sering kali juga mendukung manajemen sesi atau autentikasi. Pada tugas ini, implementasi library HTTP membantu dalam berkomunikasi antara aplikasi Flutter dengan backend (misalnya Django) melalui protokol HTTP.
+
+### 3. CookieRequest dan Pentingnya untuk Dibagikan ke Semua Komponen di Aplikasi Flutter:
+   - CookieRequest adalah sebuah instance atau objek yang digunakan untuk mengelola informasi cookie dalam permintaan HTTP. Cookie adalah mekanisme yang digunakan server untuk menyimpan informasi tentang sesi pengguna atau preferensi lainnya. Dibagikannya CookieRequest ke semua komponen aplikasi Flutter penting karena memastikan bahwa setiap permintaan HTTP yang dilakukan dari berbagai bagian aplikasi dapat mengelola cookie dengan konsisten. Ini penting terutama dalam aplikasi yang memerlukan autentikasi atau menyimpan informasi sesi pengguna.
+
+### 4. Mekanisme Pengiriman Data dari Input hingga Tampilan pada Flutter:
+   - Proses ini melibatkan beberapa langkah:
+     - Pengguna memberikan input melalui antarmuka pengguna Flutter.
+     - Data input diambil dan dimasukkan ke dalam struktur data yang sesuai (misalnya menggunakan model).
+     - Data dikirim ke backend menggunakan permintaan HTTP (POST, misalnya).
+     - Backend menerima data, melakukan validasi, dan memprosesnya.
+     - Backend mengirim respons kembali ke aplikasi Flutter.
+     - Aplikasi Flutter menerima respons, melakukan parsing data jika perlu, dan menampilkan hasilnya kepada pengguna.
+
+### 5. Mekanisme Autentikasi dari Login hingga Logout:
+   - Proses autentikasi ini melibatkan langkah-langkah berikut:
+     - **Login:**
+       - Pengguna memasukkan kredensial (username dan password) pada antarmuka pengguna Flutter.
+       - Aplikasi Flutter mengirim permintaan HTTP POST ke endpoint login yang disediakan oleh backend (misalnya Django).
+       - Backend menerima permintaan, memvalidasi kredensial, dan menghasilkan token atau sesi untuk pengguna yang berhasil.
+       - Token atau sesi dikirim kembali ke aplikasi Flutter sebagai respons.
+       - Aplikasi Flutter menyimpan token atau sesi untuk digunakan dalam permintaan selanjutnya.
+     - **Register:**
+       - Pengguna mengisi formulir dengan informasi yang diperlukan (misalnya nama, email, password) pada antarmuka pengguna Flutter.
+       - Aplikasi Flutter mengirim permintaan HTTP POST ke endpoint register di backend.
+       - Backend menerima permintaan, memvalidasi dan menyimpan informasi pengguna baru ke dalam basis data.
+       - Aplikasi Flutter menerima respons dari backend, biasanya berupa konfirmasi bahwa registrasi berhasil.
+     - **Logout:**
+       - Pengguna mengklik tombol logout pada antarmuka pengguna Flutter.
+       - Aplikasi Flutter mengirim permintaan HTTP ke endpoint logout di backend (opsional tergantung pada implementasi).
+       - Backend menghapus token atau sesi dari penyimpanan sesi aktif.
+       - Aplikasi Flutter menghapus token atau sesi lokalnya, mengakhiri akses pengguna ke area terbatas atau fungsi autentikasi.
